@@ -1,0 +1,79 @@
+.\"Modified from man(1) of FreeBSD, the NetBSD mdoc.template, and mdoc.samples.
+.\"See Also:
+.\"man mdoc.samples for a complete listing of options
+.\"man mdoc for the short list of editing options
+.\"/usr/share/misc/mdoc.template
+.Dd 8/4/10               \" DATE
+.Dt internsctl      \" Program name and manual section number
+.Os Darwin
+.Sh NAME                 \" Section Header - required - don't modify
+.Nm internsctl
+.\" Use .Nm macro to designate other names for the documented program.
+.Nd Custom linux command.
+.Sh SYNOPSIS             \" Section Header - required - don't modify
+.Nm
+.Op options              \" [options]
+.Op Fl Fl flags         \" [-a path]
+.Op Ar file              \" [file]
+.Sh DESCRIPTION          \" Section Header - required - don't modify
+.Pp                      \" Inserts a space
+.Bl -tag -width -indent  \" Begins a tagged list
+.It cpu -- See details of CPU
+
+.Nm Usage:
+.Nm internsctl cpu getinfo
+
+
+.It memory -- See details of Memory
+
+.Nm Usage:
+.Nm internsctl memory getinfo
+
+
+.It Create New User
+
+.Nm Usage:
+.Nm internsctl user create <username>
+
+
+.It List all User
+
+.Nm Usage:
+.Nm internsctl user list
+
+
+.It List all sudo user
+
+.Nm Usage:
+.Nm internsctl user list --sudo-only
+
+
+.It Get file info
+
+.Nm Usage:
+.Nm internsctl file getinfo <file-name>
+
+
+.It Get file info using options
+
+.Nm Usage:
+.Nm internsctl file getinfo [options] <file-name>
+.El                      \" Ends the list
+.Pp
+A list of flags and their descriptions:
+.Bl -tag -width -indent  \" Differs from above in tag removed
+.It Fl Fl version                 \"-a flag as a list item
+Version Info
+.It Fl Fl size
+Show size of file, use with file getinfo
+.It Fl Fl permissions
+Show permission of file, use with file getinfo
+.It Fl Fl owner
+Show owner of file, use with file getinfo
+.It Fl Fl last-modified
+Show last modified time of file, use with file getinfo
+.It Fl Fl help
+Show Help
+.El                      \" Ends the list
+.Pp
+

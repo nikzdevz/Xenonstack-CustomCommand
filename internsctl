@@ -1,0 +1,60 @@
+#!/bin/bash
+
+version="v0.1.0"
+
+# Level Easy && Level Advanced
+
+if [ "$2" = "getinfo" ]; then
+	case $1 in
+		"cpu")
+			lscpu
+		;;
+		"memory")
+			free 
+		;;
+		"file")
+			case $3 in
+               			 "--size"|"-s")
+                        			ls -l $4 | awk '{print $5}'
+                			;;
+               			 "--permissions"|"-p")
+                        			ls -l $4 | awk '{print $1}'
+                			;;
+                		"--owner"|'-o')
+                        			ls -l $4 | awk '{print $3}'
+                			;;
+                		"--last-modified"|'-m')
+				       		ls -l --time-style=long-iso $4 | awk '{print $6, $7}'
+                			;;
+        			*)
+					echo "File: $(ls -l $3 | awk '{print $9}')"
+				      	echo "Access: $(ls -l $3 | awk '{print $1}')"
+					echo "Size: $(ls -l $3 | awk '{print $5}')"
+					echo "Owner: $(ls -l $3 | awk '{print $3}')"	
+			esac
+	esac
+elif [ "$1" = "--version" ]; then
+	echo $0 $version
+elif [ "$1" = "--help" ]; then
+	man ./man-internsctl
+
+# Level Intermediate
+
+elif [ "$1" = "user" ]; then
+	case $2 in
+		"create")
+			sudo useradd -m $3
+			sudo su --shell=/bin/bash - $3
+		;;
+		"list")
+		        if [ "$3" = "--sudo-only" ]; then
+			        grep -Po '^sudo.+:\K.*$' /etc/group
+		        else
+		       	        awk -F: '$3 >= 1000 && $3 < 65534 { print $1 }' /etc/passwd
+		        fi
+		;;	       
+	esac
+else
+	man ./man-internsctl
+fi
+	
